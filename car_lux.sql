@@ -1,0 +1,98 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 28, 2026 at 07:40 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `car lux`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_category`
+--
+
+CREATE TABLE `service_category` (
+  `Category_id` int(11) NOT NULL,
+  `category_name` varchar(200) NOT NULL,
+  `Description` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wash_package`
+--
+
+CREATE TABLE `wash_package` (
+  `Package_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `Package_name` varchar(200) NOT NULL,
+  `Description` text NOT NULL,
+  `Price` int(11) NOT NULL,
+  `Duration_time` time NOT NULL,
+  `Status` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `service_category`
+--
+ALTER TABLE `service_category`
+  ADD PRIMARY KEY (`Category_id`);
+
+--
+-- Indexes for table `wash_package`
+--
+ALTER TABLE `wash_package`
+  ADD PRIMARY KEY (`Package_id`),
+  ADD UNIQUE KEY `category_id` (`category_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `service_category`
+--
+ALTER TABLE `service_category`
+  MODIFY `Category_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `wash_package`
+--
+ALTER TABLE `wash_package`
+  MODIFY `Package_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `wash_package`
+--
+ALTER TABLE `wash_package`
+  ADD CONSTRAINT `wash_package_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `service_category` (`Category_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
